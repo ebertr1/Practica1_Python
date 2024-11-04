@@ -1,0 +1,68 @@
+[
+    {
+        "fecha": "2024-11-03 13:25:40",
+        "mensaje": "Proyecto ssddddddddd actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 13:33:23",
+        "mensaje": "Inversionista Eberson Daniel Guayllas Poma actualizado",
+        "operacion": "actualizar",
+        "tipo": "inversionista"
+    },
+    {
+        "fecha": "2024-11-03 14:10:32",
+        "mensaje": "Proyecto Eber Daniel creado",
+        "operacion": "crear",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 14:17:48",
+        "mensaje": "Proyecto con ID 2 eliminado",
+        "operacion": "eliminar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 18:13:42",
+        "mensaje": "Inversionista Eberson Daniel Guayllas Poma creado",
+        "operacion": "crear",
+        "tipo": "inversionista"
+    },
+    {
+        "fecha": "2024-11-03 18:16:10",
+        "mensaje": "Inversionista Edison Mauricio Poma Flores creado",
+        "operacion": "crear",
+        "tipo": "inversionista"
+    },
+    {
+        "fecha": "2024-11-03 18:18:29",
+        "mensaje": "Inversionista Eberson Daniel Guayllas Pomas actualizado",
+        "operacion": "actualizar",
+        "tipo": "inversionista"
+    },
+    {
+        "fecha": "2024-11-03 18:24:54",
+        "mensaje": "Proyecto HidroMartin creado",
+        "operacion": "crear",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 18:27:10",
+        "mensaje": "Proyecto Las Marias creado",
+        "operacion": "crear",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 18:28:39",
+        "mensaje": "Proyecto HidroJuan actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-03 18:29:21",
+        "mensaje": "Proyecto con ID 2 eliminado",
+        "operacion": "eliminar",
+        "tipo": "proyecto"
+    }
+]

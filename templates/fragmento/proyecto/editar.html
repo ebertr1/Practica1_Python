@@ -1,0 +1,97 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="pagetitle text-center">
+    <h1 class="text-black">Editar proyecto </h1> <!-- Cambiado a text-black -->
+  </div>
+  
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-white">Ingresa los datos del proyecto </h5>
+
+            <form class="row g-3 needs-validation" method="POST" action="/admin/proyecto/update" novalidate>
+                <input type="hidden" value="{{proyecto.idProyecto }}" name="id" />
+                <div class="mb-3">
+                  <label for="nombre" class="form-label text-white">Nombre del Proyecto</label>
+                  <input type="text" class="form-control" name="nombre" required value="{{ proyecto.nombre }}">
+                </div>
+                <div class="mb-3">
+                  <label for="inversion" class="form-label text-white">Inversión Proyecto</label>
+                  <input type="text" class="form-control" name="inversion" required value="{{proyecto.inversion }}">
+                </div>
+                <div class="mb-3">
+                  <label for="inversionistas" class="form-label text-white">Inversionistas</label>
+                  <input type="text" class="form-control" name="inversionistas" required value="{{proyecto.inversionistas }}">
+                </div>
+                <div class="mb-3">
+                  <label for="duracion" class="form-label text-white">Duracion Proyecto</label>
+                  <input type="text" class="form-control" name="duracion" required value="{{ proyecto.duracion }}">
+                </div>
+                <div class="mb-3">
+                  <label for="fechaInicio" class="form-label text-white">Fecha de Inicio</label>
+                  <input type="text" class="form-control" name="fechaInicio" required value="{{ proyecto.fechaInicio}}">
+                </div>
+                <div class="mb-3">
+                  <label for="fechaFin" class="form-label text-white">Fecha de Fin</label>
+                  <input type="text" class="form-control" name="fechaFin" required value="{{ proyecto.fechaFin}}">
+                </div>
+                <div class="mb-3">
+                  <label for="generacionDiaria" class="form-label text-white">Generacion Diaria</label>
+                  <input type="text" class="form-control" name="generacionDiaria" required value="{{ proyecto.generacionDiaria }}">
+                </div>
+                <div class="mb-3">
+                  <label for="costoOperativo" class="form-label text-white">Costo Operativo</label>
+                  <input type="text" class="form-control" name="costoOperativo" required value="{{ proyecto.costoOperativo }}">
+                </div>
+                <div class="mb-3">
+                  <label for="tipoEnergia" class="form-label text-white">Tipo De Energia</label>
+                  <input type="text" class="form-control" name="tipoEnergia" required value="{{ proyecto.tipoEnergia }}">
+                </div>
+                <div class="mb-3">
+                  <label for="ubicacion" class="form-label text-white">Ubicacion</label>
+                  <input type="text" class="form-control" name="ubicacion" required value="{{ proyecto.ubicacion }}">
+                </div>
+                
+                <button type="submit" class="btn btn-custom btn-primary">Guardar</button> <!-- Estilo de botón personalizado -->
+            </form>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .pagetitle {
+    margin-bottom: 20px;
+  }
+
+  .text-black {
+    color: #000; /* Color negro para el encabezado */
+  }
+
+  .text-white {
+    color: #fff; /* Color blanco para otros textos */
+  }
+
+  .btn-custom {
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-custom.btn-primary {
+    background-color: #007bff; /* Color personalizado para el botón "Guardar" */
+  }
+
+  .btn-custom.btn-primary:hover {
+    background-color: #0056b3; /* Color de fondo al pasar el mouse */
+  }
+</style>
+{% endblock %}

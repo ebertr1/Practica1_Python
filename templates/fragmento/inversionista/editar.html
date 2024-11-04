@@ -1,0 +1,78 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="pagetitle">
+    <h1>Editar Inversionista </h1>
+  </div>
+  
+  <section class="section">
+    <div class="row">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title">Ingresa los datos del inversionista </h5>
+
+            <form class="row g-3 needs-validation" method="POST" action="/admin/inversionista/update" novalidate>
+                <input type="hidden" value="{{ inversionista.idInversionista }}" name="id" />
+                <div class="mb-3">
+                <label for="ape" class="form-label">Apellido</label>
+                <input type="text" class="form-control"  name="ape" required value="{{inversionista.apellido}}">
+              </div>
+              <div class="mb-3">
+                <label for="nom" class="form-label">Nombre</label>
+                <input type="text" class="form-control"  name="nom" required value="{{inversionista.nombre}}">
+              </div>
+              <div class="mb-3">
+                <label for="dni" class="form-label">DNI</label>
+                <input type="text" class="form-control"  name="dni" required value="{{inversionista.dni}}">
+              </div>
+              
+              <button type="submit" class="btn btn-primary">Guardar</button>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+<style>
+  .pagetitle {
+    margin-bottom: 20px;
+  }
+
+  .text-black {
+    color: #000; /* Color negro para el encabezado y etiquetas */
+  }
+
+  .text-white {
+    color: #fff; /* Color blanco para otros textos */
+  }
+
+  .btn-custom {
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-custom.btn-light {
+    background-color: #f8f9fa; /* Color claro para el botón "Guardar" */
+    color: #000; /* Texto en negro */
+  }
+
+  .btn-custom.btn-secondary {
+    background-color: #6c757d; /* Color gris para el botón "Cancelar" */
+  }
+
+  .btn-custom.btn-light:hover {
+    background-color: #e2e6ea; /* Color de fondo al pasar el mouse */
+  }
+
+  .btn-custom.btn-secondary:hover {
+    background-color: #5a6268; /* Color de fondo al pasar el mouse */
+  }
+</style>
+{% endblock %}

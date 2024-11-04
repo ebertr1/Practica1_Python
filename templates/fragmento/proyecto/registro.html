@@ -1,0 +1,110 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="container">
+  <div class="pagetitle text-center">
+    <h1 class="text-black">Registro de Proyectos </h1>
+  </div>
+  
+  <section class="section">
+    <div class="row justify-content-center">
+      <div class="col-lg-8">
+        <div class="card">
+          <div class="card-body">
+            <h5 class="card-title text-white">Ingresa los datos del proyecto </h5>
+
+            <form class="row g-3 needs-validation" method="POST" action="/admin/proyecto/save" novalidate>
+              <div class="mb-3">
+                <label for="nombre" class="form-label text-black">Nombre</label>
+                <input type="text" class="form-control" name="nombre" required>
+              </div>
+              <div class="mb-3">
+                <label for="inversion" class="form-label text-black">Inversion</label>
+                <input type="number" class="form-control" name="inversion" required>
+              </div>
+              <div class="mb-3">
+                <label for="inversionistas" class="form-label text-black">Inversionistas</label>
+                <input type="inversionistas" class="form-control" name="inversionistas" required>
+              </div>
+              <div class="mb-3">
+                <label for="duracion" class="form-label text-black">Duracion</label>
+                <input type="number" class="form-control" name="duracion" required>
+              </div>
+              <div class="mb-3">
+                <label for="fechaInicio" class="form-label text-black">Fecha Inicio</label>
+                <input type="text" class="form-control" name="fechaInicio" required>
+              </div>
+              <div class="mb-3">
+                <label for="fechaFin" class="form-label text-black">fecha final </label>
+                <input type="text" class="form-control" name="fechaFin" required>
+              </div>
+              <div class="mb-3">
+                <label for="generacionDiaria" class="form-label text-black">Generacion Diaria</label>
+                <input type="number" class="form-control" name="generacionDiaria" required>
+              </div>
+              <div class="mb-3">
+                <label for="CostoOperativo" class="form-label text-black">Costo Operativo</label>
+                <input type="number" class="form-control" name="costoOperativo" required>
+              </div>
+              <div class="mb-3">
+                <label for="tipoEnergia" class="form-label text-black">Tipo de energia</label>
+                <input type="text" class="form-control" name="tipoEnergia" required>
+              </div>
+              <div class="mb-3">
+                <label for="ubicacion" class="form-label text-black">Ubicacion</label>
+                <input type="text" class="form-control" name="ubicacion" required>
+              </div>
+
+              
+              <div class="d-flex justify-content-between">
+                <button type="submit" class="btn btn-custom btn-light">Guardar</button>
+                <a href="/admin/inversionista/list" class="btn btn-custom btn-secondary">Cancelar</a>
+              </div>
+            </form>
+
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+</div>
+
+<style>
+  .pagetitle {
+    margin-bottom: 20px;
+  }
+
+  .text-black {
+    color: #000; /* Color negro para el encabezado y etiquetas */
+  }
+
+  .text-white {
+    color: #fff; /* Color blanco para otros textos */
+  }
+
+  .btn-custom {
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-custom.btn-light {
+    background-color: #f8f9fa; /* Color claro para el botón "Guardar" */
+    color: #000; /* Texto en negro */
+  }
+
+  .btn-custom.btn-secondary {
+    background-color: #6c757d; /* Color gris para el botón "Cancelar" */
+  }
+
+  .btn-custom.btn-light:hover {
+    background-color: #e2e6ea; /* Color de fondo al pasar el mouse */
+  }
+
+  .btn-custom.btn-secondary:hover {
+    background-color: #5a6268; /* Color de fondo al pasar el mouse */
+  }
+</style>
+{% endblock %}

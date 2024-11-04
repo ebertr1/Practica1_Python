@@ -1,0 +1,101 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<div class="pagetitle">
+  <div class="col-12 d-flex flex-column align-items-center">
+    <h2 class="mt-4 text-black">LISTADO DE INVERSIONISTAS </h2>  <!-- Cambiado a text-black -->
+    <div class="d-flex justify-content-end w-100 mb-3">
+      <a href="/admin/inversionista/register" class="btn btn-custom btn-success">Nuevo</a>
+    </div>
+    
+    <div class="table-responsive w-75">
+      <table class="table table-custom text-white">
+        <thead>
+          <tr>
+            <th>Nro</th>
+            <th>Inversionista</th>
+            <th>DNI</th>
+            <th>Acciones</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% if list %}
+            {% for item in list %}
+            <tr id="row-{{ item.idInversionista }}">
+              <td>{{ loop.index }}</td>
+              <td>{{ item.apellido }} {{ item.nombre }}</td>
+              <td>{{ item.dni }}</td>
+              <td>
+                <a href="/admin/inversionista/edit/{{ item.idInversionista }}" class="btn btn-custom btn-info">Modificar</a>
+                <button class="btn btn-custom btn-danger" onclick="deleteRow({{ item.i }})">Eliminar</button>
+              </td>
+            </tr>
+            {% endfor %}
+          {% else %}
+            <tr>
+              <td colspan="4" class="text-center">No hay clientes inversionistas.</td>
+            </tr>
+          {% endif %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<style>
+  /* Contenedor central y fondo oscuro */
+  .pagetitle {
+    display: flex;
+    justify-content: center;
+    background-color: #ffffff;
+    padding: 20px;
+    min-height: 100vh;
+  }
+
+  /* Tabla centrada con diseño responsivo */
+  .table-custom {
+    background-color: #333;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.3);
+  }
+
+  .table-custom th, .table-custom td {
+    padding: 12px;
+  }
+
+  /* Diseño moderno para los botones */
+  .btn-custom {
+    font-size: 14px;
+    color: #fff;
+    border-radius: 5px;
+    padding: 8px 16px;
+    transition: background-color 0.3s ease;
+  }
+
+  .btn-custom.btn-success {
+    background-color: #28a745;
+  }
+
+  .btn-custom.btn-info {
+    background-color: #17a2b8;
+  }
+
+  .btn-custom.btn-danger {
+    background-color: #dc3545;
+  }
+
+  .btn-custom:hover {
+    opacity: 0.85;
+  }
+</style>
+
+<script>
+  function deleteRow(id) {
+    const row = document.getElementById(row-${id});
+    if (confirm("¿Estás seguro de que deseas eliminar este cliente?")) {
+      row.remove(); // Elimina la fila de la tabla
+    }
+  }
+</script>
+{% endblock %}

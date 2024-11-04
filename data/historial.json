@@ -1,0 +1,14 @@
+[
+    {
+        "operacion": "crear",
+        "entidad": "estudiante",
+        "detalle": "Se cre\u00f3 un nuevo estudiante con ID X",
+        "fecha_hora": "2024-11-03 13:21:47"
+    },
+    {
+        "operacion": "crear",
+        "entidad": "estudiante",
+        "detalle": "Se cre\u00f3 un nuevo estudiante con ID X",
+        "fecha_hora": "2024-11-03 13:21:49"
+    }
+]

@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta content="width=device-width, initial-scale=1.0" name="viewport">
+  <title>Index - iPortfolio Bootstrap Template</title>
+  <meta content="" name="description">
+  <meta content="" name="keywords">
+
+  <!-- Favicons -->
+  <link href="{{ url_for('static', filename='img/favicon.png') }}" rel="icon">
+  <link href="{{ url_for('static', filename='img/apple-touch-icon.png') }}" rel="apple-touch-icon">
+
+  <!-- Fonts -->
+  <link href="https://fonts.googleapis.com" rel="preconnect">
+  <link href="https://fonts.gstatic.com" rel="preconnect" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Roboto:wght@100;300;400;500;700;900&family=Poppins:wght@100;200;300;400;500;600;700;800;900&family=Raleway:wght@100;200;300;400;500;600;700;800;900&display=swap" rel="stylesheet">
+
+  <!-- Vendor CSS Files -->
+  <link href="{{ url_for('static', filename='vendor/bootstrap/css/bootstrap.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/bootstrap-icons/bootstrap-icons.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/aos/aos.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/glightbox/css/glightbox.min.css') }}" rel="stylesheet">
+  <link href="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.css') }}" rel="stylesheet">
+
+  <!-- Main CSS File -->
+  <link href="{{ url_for('static', filename='css/main.css') }}" rel="stylesheet">
+</head>
+
+<body class="index-page">
+
+  <header id="header" class="header dark-background d-flex flex-column">
+    <i class="header-toggle d-xl-none bi bi-list" aria-label="Toggle Navigation Menu"></i>
+    
+    <nav id="navmenu" class="navmenu">
+      <ul>
+        <li><a href="/admin/inversionista/list"><i class="bi bi-person navicon"></i> Inversionistas </a></li>
+        <li><a href="/admin/proyecto/list"><i class="bi bi-file-earmark-text navicon"></i> Proyectos</a></li>
+        <li><a href="/admin/proyecto/historial"><i class="bi bi-images navicon"></i> Historial de cambios Proyecto</a></li>
+        <li><a href="/admin/inversionista/historial"><i class="bi bi-images navicon"></i> Historial de cambios Inversionista </a></li>
+        <li class="dropdown">
+          <a href="#"><i class="bi bi-menu-button navicon"></i> <span>Dropdown</span> <i class="bi bi-chevron-down toggle-dropdown"></i></a>
+        </li>
+        <li><a href="#contact"><i class="bi bi-envelope navicon"></i> Contact</a></li>
+      </ul>
+    </nav>
+  </header>
+  <div class="container">
+    {% block content %}
+    {% endblock %}
+  </div>
+  <main class="main">
+
+    <!-- Contact Section -->
+  
+                
+        
+  </main>
+
+  <footer id="footer" class="footer position-relative light-background">
+    <div class="container">
+      <div class="copyright text-center">
+        <p>© <span>Copyright</span> <strong class="px-1 sitename">iPortfolio</strong> <span>All Rights Reserved</span></p>
+      </div>
+      <div class="credits">
+        Designed by <a href="https://bootstrapmade.com/">BootstrapMade</a>
+      </div>
+    </div>
+  </footer>
+
+  <!-- Scroll Top -->
+  <a href="#" id="scroll-top" class="scroll-top d-flex align-items-center justify-content-center"><i class="bi bi-arrow-up-short"></i></a>
+
+  <!-- Preloader -->
+  <div id="preloader"></div>
+
+  <!-- Vendor JS Files -->
+  <script src="{{ url_for('static', filename='vendor/bootstrap/js/bootstrap.bundle.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/php-email-form/validate.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/aos/aos.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/typed.js/typed.umd.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/purecounter/purecounter_vanilla.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/waypoints/noframework.waypoints.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/glightbox/js/glightbox.min.js') }}"></script>
+  <script src="{{ url_for('static', filename='vendor/swiper/swiper-bundle.min.js') }}"></script>
+
+  <!-- Main JS File -->
+  <script src="{{ url_for('static', filename='js/main.js') }}"></script>
+
+</body>
+
+</html>

@@ -1,0 +1,64 @@
+{% extends 'index.html' %}
+
+{% block content %}
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <title>Historial de Operaciones</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-container {
+            margin: 20px auto;
+            max-width: 800px;
+            background-color: #f8f9fa;
+            border-radius: 8px;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+        h1 {
+            text-align: center;
+            margin: 20px 0;
+            color: #333;
+        }
+        .table {
+            width: 100%;
+            margin-bottom: 1rem;
+            color: #212529;
+        }
+        .table thead th {
+            background-color: #007bff;
+            color: white;
+            text-align: center;
+        }
+        .table tbody tr:hover {
+            background-color: #f1f1f1;
+        }
+    </style>
+</head>
+<body>
+    <h1>Historial de Operaciones</h1>
+    <div class="table-container">
+        <table class="table table-bordered">
+            <thead>
+                <tr>
+                    <th>Operación</th>
+                    <th>Entidad</th>
+                    <th>Detalle</th>
+                    <th>Fecha y Hora</th>
+                </tr>
+            </thead>
+            <tbody>
+                {% for registro in historial %}
+                <tr>
+                    <td>{{ registro.operacion }}</td>
+                    <td>{{ registro.tipo }}</td> <!-- Cambiado a 'tipo' -->
+                    <td>{{ registro.mensaje }}</td> <!-- Cambiado a 'mensaje' -->
+                    <td>{{ registro.fecha }}</td> <!-- Cambiado a 'fecha' -->
+                </tr>
+                {% endfor %}
+            </tbody>
+        </table>
+    </div>
+</body>
+</html>
+{% endblock %}
