@@ -64,5 +64,65 @@
         "mensaje": "Proyecto con ID 2 eliminado",
         "operacion": "eliminar",
         "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-13 07:19:54",
+        "mensaje": "Proyecto con ID 2 eliminado",
+        "operacion": "eliminar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:53:40",
+        "mensaje": "Proyecto Zize Jam actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:56:58",
+        "mensaje": "Proyecto Ariana Sophia actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:57:22",
+        "mensaje": "Proyecto Eberson Guayllas actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:57:52",
+        "mensaje": "Proyecto Ariana Sarango actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:58:12",
+        "mensaje": "Proyecto Eberson Guayllas actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:58:49",
+        "mensaje": "Proyecto Ariana Sophia actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 21:59:57",
+        "mensaje": "Proyecto Ariana Sarango actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 22:00:23",
+        "mensaje": "Proyecto Ariana Sophia actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
+    },
+    {
+        "fecha": "2024-11-29 22:00:43",
+        "mensaje": "Proyecto Zize Jam actualizado",
+        "operacion": "actualizar",
+        "tipo": "proyecto"
     }
 ]

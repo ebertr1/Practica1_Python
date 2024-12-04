@@ -1,86 +1,180 @@
 {% extends 'index.html' %}
 
 {% block content %}
+<script src="{{ url_for('static', filename='js/main.js') }}"></script>
+<script src="{{ url_for('static', filename='js/jquery.js') }}"></script>
+<!-- Quill.js CSS -->
+<link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+
+<!-- Quill.js JavaScript -->
+<script src="https://cdn.quilljs.com/1.3.7/quill.min.js"></script>
+
+<script>
+$(document).ready(function () {
+    function actualizarUrlOrden() {
+        // Obtén los valores seleccionados usando las IDs correctas
+        const criterio = $("#criterio").val();
+        const metodo = $("#metodo").val();
+        const orden = $("#orden").val(); // Asegúrate de que #orden existe
+
+        // Valida que los valores no estén vacíos antes de construir la URL
+        if (criterio && metodo && orden) {
+            const url = `/admin/proyecto/list/${criterio}/${orden}/${metodo}`;
+            $("#ordenar").attr("href", url);
+        } else {
+            // Muestra un mensaje de error en consola si algo falla
+            console.error("Faltan parámetros para construir la URL.");
+            $("#ordenar").attr("href", "#"); // No permite acción si falta algo
+        }
+    }
+
+    // Llama a la función cuando los valores cambian
+    $("#criterio, #metodo, #orden").change(function () {
+        actualizarUrlOrden();
+    });
+
+    // Inicializa la URL al cargar la página
+    actualizarUrlOrden();
+});
+
+</script>
+
 <div class="pagetitle">
-  <div class="col-12 d-flex flex-column align-items-center">
-    <h2 class="mt-4 text-black">LISTADO DE Proyectos</h2>
-    <div class="d-flex justify-content-end w-100 mb-3">
-      <a href="/admin/proyecto/register" class="btn btn-custom btn-success">Nuevo</a>
+    <h1>Listado de Proyectos</h1>
+    <nav>
+        <ol class="breadcrumb">
+            <li class="breadcrumb-item"><a href="index.html">Home</a></li>
+            <li class="breadcrumb-item">Pages</li>
+            <li class="breadcrumb-item active">Listado de Proyectos</li>
+        </ol>
+    </nav>
+</div>
+
+<div class="col-12">
+    <h2 class="mt-4">LISTADO DE PROYECTOS</h2>
+
+    <!-- Barra de Ordenación -->
+    <div class="col-lg-10 mb-3">
+        <div class="input-group">
+            <select id="criterio" class="form-select" style="max-width: 150px;">
+                <option value="nombre">Ordenar por Nombre</option>
+                <option value="inversionistas">Ordenar por Inversionistas</option>
+                <option value="ubicacion">Ordenar por Ubicación</option>
+            </select>
+
+            <select id="metodo" class="form-select" style="max-width: 150px;">
+                <option value="order">Quick Sort</option>
+                <option value="merge">Merge Sort</option>
+                <option value="shell">Shell Sort</option>
+            </select>
+
+            <select id="orden" class="form-select" style="max-width: 150px;">
+                <option value="0">Ascendente</option>
+                <option value="1">Descendente</option>
+            </select>
+
+            <a id="ordenar" href="#" class="btn btn-success">Ordenar</a>
+        </div>
+    </div>
+    <div class="col-lg-10 mb-3">
+        <div class="input-group">
+            <select id="categoria" class="form-select" style="max-width: 150px;">
+                <option value="nombre">Buscar por Nombre</option>
+                <option value="inversionistas">Buscar por Inversionistas</option>
+                <option value="ubicacion">Buscar por Ubicación</option>
+            </select>
+            <input type="text" id="texto" class="form-control" placeholder="Buscar proyecto..." />
+            <button id="buscar" class="btn btn-primary">Buscar</button>
+        </div>
     </div>
 
-    <div class="table-responsive w-75">
-      <table class="table table-custom text-white">
+    <table class="table">
         <thead>
-          <tr>
-            <th>Nro</th>
-            <th>Nombre</th>
-            <th>Inversión</th>
-            <th>Duración</th>
-            <th>Fecha Inicio</th>
-            <th>Fecha Final</th>
-            <th>Inversionistas</th>
-            <th>Generación Diaria</th>
-            <th>Costo Operativo</th>
-            <th>Tipo Energía</th>
-            <th>Ubicación</th>
-            <th>Acciones</th>
-          </tr>
+            <tr>
+                <th>Nombre</th>
+                <th>Inversión</th>
+                <th>Duración</th>
+                <th>Fecha Inicio</th>
+                <th>Fecha Final</th>
+                <th>Inversionistas</th>
+                <th>Generación Diaria</th>
+                <th>Costo Operativo</th>
+                <th>Tipo Energía</th>
+                <th>Ubicación</th>
+                <th>Acciones</th>
+            </tr>
         </thead>
         <tbody>
-          {% if list %}
-            {% for item in list %}
-            <tr id="row-{{ item.idProyecto }}">
-              <td>{{ loop.index }}</td>
-              <td>{{ item.nombre }}</td>
-              <td>{{ item.inversion }}</td>
-              <td>{{ item.duracion }}</td>
-              <td>{{ item.fechaInicio }}</td>
-              <td>{{ item.fechaFin }}</td>
-              <td>{{ item.inversionistas }}</td>
-              <td>{{ item.generacionDiaria }}</td>
-              <td>{{ item.costoOperativo }}</td>
-              <td>{{ item.tipoEnergia }}</td>
-              <td>{{ item.ubicacion }}</td>
-              <td>
-                <a href="/admin/proyecto/edit/{{ item.idProyecto }}" class="btn btn-custom btn-info">Modificar</a>
-                <button class="btn btn-danger" onclick="deleteProyecto({{ item.idProyecto }})">Eliminar</button>
-              </td>
-            </tr>
-            {% endfor %}
-          {% else %}
-            <tr>
-              <td colspan="12" class="text-center">No hay proyectos registrados.</td>
-            </tr>
-          {% endif %}
+            {% if list %}
+                {% for item in list %}
+                <tr id="row-{{ item.idProyecto }}">
+                    <td>{{ item.nombre }}</td>
+                    <td>{{ item.inversion }}</td>
+                    <td>{{ item.duracion }}</td>
+                    <td>{{ item.fechaInicio }}</td>
+                    <td>{{ item.fechaFin }}</td>
+                    <td>{{ item.inversionistas }}</td>
+                    <td>{{ item.generacionDiaria }}</td>
+                    <td>{{ item.costoOperativo }}</td>
+                    <td>{{ item.tipoEnergia }}</td>
+                    <td>{{ item.ubicacion }}</td>
+                    <td>
+                        <a href="/admin/proyecto/edit/{{ item.idProyecto }}" class="btn btn-info">Modificar</a>
+                        <button class="btn btn-danger" onclick="deleteRow({{ item.idProyecto }})">Eliminar</button>
+                    </td>
+                </tr>
+                {% endfor %}
+            {% else %}
+                <tr>
+                    <td colspan="11">No hay proyectos registrados.</td>
+                </tr>
+            {% endif %}
         </tbody>
-      </table>
-    </div>
-  </div>
+    </table>
 </div>
 
 <script>
-  function deleteProyecto(id) {
-    if (confirm("¿Estás seguro de que deseas eliminar este proyecto?")) {
-        fetch(`/admin/proyecto/delete/${id}`, { // Asegúrate de que la ruta API sea la correcta
-            method: 'DELETE'
-        })
-        .then(response => {
-            if (response.ok) {
-                document.getElementById(`row-${id}`).remove(); // Eliminar la fila de la tabla
-                alert("Proyecto eliminado exitosamente."); // Mensaje de éxito
-            } else {
-                alert("Error al eliminar el proyecto."); // Mensaje de error
-            }
-        })
-        .catch(error => {
-            console.error("Hubo un error:", error);
-            alert("Se produjo un error al intentar eliminar el proyecto."); // Mensaje de error
-        });
+    function deleteRow(id) {
+        const row = document.getElementById(`row-${id}`);
+        if (confirm("¿Estás seguro de que deseas eliminar este proyecto?")) {
+            row.remove(); // Elimina la fila de la tabla
+        }
     }
-  }
 </script>
+<script>
+    $(document).ready(function () {
+        function url_change() {
+            var texto = $("#texto").val(); // Obtener el texto de búsqueda
+            var categoria = $("#categoria").val(); // Obtener la categoría seleccionada
 
-<style>
-  /* Estilos CSS aquí, ajusta según tus necesidades */
-</style>
+            // Solo actualiza si hay texto
+            if (texto) {
+                // Construir la URL correctamente, con la categoría y el texto
+                var url = `/admin/proyecto/list/search/${categoria}/${texto}`;
+                $("#btn").attr("href", url); // Asignar la URL al botón de búsqueda
+            }
+        }
+
+        $("#texto").keyup(function () {
+            url_change(); // Llamar a la función cuando el usuario escribe en el input
+        });
+
+        // Corregido el ID del selector
+        $("#categoria").change(function () {
+            url_change(); // Llamar a la función cuando cambie la categoría
+        });
+
+        // Agregar manejo del click en el botón de búsqueda
+        $("#buscar").click(function (e) {
+            e.preventDefault();
+            var texto = $("#texto").val();
+            if (!texto) {
+                alert("Por favor ingrese un texto para buscar");
+                return;
+            }
+            // Redirigir a la URL construida
+            window.location.href = `/admin/proyecto/list/search/${$("#categoria").val()}/${texto}`;
+        });
+    });
+</script>
 {% endblock %}

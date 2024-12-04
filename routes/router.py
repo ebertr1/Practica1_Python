@@ -2,6 +2,7 @@ from flask import Flask, json, flash, Blueprint, url_for, jsonify, make_response
 import requests
 import registrar_historial
 import datetime
+from urllib.parse import quote
 
 router = Blueprint('router', __name__)
 
@@ -228,3 +229,102 @@ def ver_historssial():
         historial = []
     
     return render_template("fragmento/inversionista/historial.html", historial=historial)
+
+@router.route('/admin/proyecto/search/<criterio>/<texto>')
+def view_buscar_person(criterio, texto):
+    url = "http://localhost:8075/api/proyecto/list/search/"
+    
+    # Codifica el texto para asegurar que los caracteres especiales y espacios no causen problemas
+    texto_codificado = quote(texto)
+    print(f"Texto recibido para búsqueda de {criterio}: {texto_codificado}")  # Agregar log para verificar el texto recibido
+    
+    r = None  # Inicializa la variable r para evitar errores en caso de que no se ejecute ningún bloque
+    if criterio == "nombre":
+        r = requests.get(url + "nombre/" + texto_codificado)
+    elif criterio == "inversionistas":
+        print(f"Buscando inversionista con el texto: {texto_codificado}")  # Agregar log para la búsqueda
+        r = requests.get(url + "inversionistas/" + texto_codificado)
+    elif criterio == "ubicacion":
+        r = requests.get(url + "ubicacion/" + texto_codificado)
+
+    # Verifica si la solicitud fue exitosa y si r no es None
+    if r:
+        if r.status_code == 200:
+            try:
+                data1 = r.json()  # Intenta convertir la respuesta a JSON
+                print(f"Datos recibidos: {data1}")  # Agregar log para verificar los datos recibidos
+                if type(data1["data"]) is dict:
+                    # Si los datos son un diccionario, crea una lista con él
+                    lista = [data1["data"]]
+                    return render_template('fragmento/proyecto/lista.html', list=lista)
+                else:
+                    # Si los datos son una lista, solo pásalos
+                    return render_template('fragmento/proyecto/lista.html', list=data1["data"])
+            except requests.exceptions.JSONDecodeError:
+                return render_template('fragmento/proyecto/lista.html', list=[], message="Error al procesar la respuesta JSON")
+        else:
+            # Si el código de estado no es 200, muestra un mensaje de error
+            return render_template('fragmento/proyecto/lista.html', list=[], message="No existe el elemento")
+    else:
+        return render_template('fragmento/proyecto/lista.html', list=[], message="Criterio no válido o error en la solicitud")
+    
+@router.route('/admin/proyecto/list/<atributo>/<tipo>/<metodo>')
+def view_order_person(atributo, tipo, metodo):
+    try:
+        print(f"Recibido: atributo={atributo}, tipo={tipo}, metodo={metodo}")
+
+        if metodo == "order":
+            url = f"http://localhost:8075/api/proyecto/list/order/{atributo}/{tipo}"
+        elif metodo == "merge":
+            url = f"http://localhost:8075/api/proyecto/list/merge/{atributo}/{tipo}"
+        elif metodo == "shell":
+            url = f"http://localhost:8075/api/proyecto/list/shell/{atributo}/{tipo}"
+        else:
+            flash("Método de ordenación no válido", category='error')
+            return render_template('fragmento/proyecto/lista.html', list=[])
+
+        r = requests.get(url)
+
+        if r.status_code == 200:
+            data = r.json()
+            return render_template('fragmento/proyecto/lista.html', list=data["data"])
+        else:
+            flash("Error al ordenar los datos", category='error')
+            return render_template('fragmento/proyecto/lista.html', list=[], message='Error al ordenar los datos')
+
+    except requests.RequestException as e:
+        flash(f"Error de conexión: {str(e)}", category='error')
+        return redirect(url_for('router.list'))
+    
+
+@router.route('/admin/proyecto/list/search/<categoria>/<texto>')
+def view_buscar_proyecto(categoria, texto):
+    try:
+        # Base URL de la API
+        base_url = "http://localhost:8075/api/proyecto/list/search"
+
+        # Validar la categoría
+        if categoria not in ["nombre", "inversionistas", "ubicacion"]:
+            flash("Categoría de búsqueda no válida", category='error')
+            return redirect(url_for('router.list'))
+
+        # Construir la URL con el criterio dinámico
+        criterio = "binario" if len(texto) <= 10 else "lineal"
+        api_url = f"{base_url}/{criterio}/{categoria}/{texto}"
+
+        # Consumir la API
+        r = requests.get(api_url)
+        data = r.json()
+
+        # Manejo de la respuesta
+        if r.status_code == 200:
+            proyectos = data.get("data", [])
+            return render_template('fragmento/proyecto/lista.html', list=proyectos)
+        else:
+            flash("No se encontraron resultados", category='info')
+            return render_template('fragmento/proyecto/lista.html', list=[])
+
+    except requests.RequestException as e:
+        flash(f"Error de conexión: {str(e)}", category='error')
+        return redirect(url_for('router.list'))
+
